@@ -1,0 +1,18 @@
+#heading {
+  background-color: lightgreen;
+  padding: 10px;
+  text-align: center;
+}
+#navigation {
+  background-color: lightblue;
+  padding: 8px;
+  text-align: center;
+}
+#navigation a{
+  color: black;
+  padding: 4px;
+  text-decoration: none;
+  border: 1px solid;
+  line-height: 2;
+  white-space: pre;
+}
