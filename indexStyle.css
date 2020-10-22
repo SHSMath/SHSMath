@@ -12,6 +12,7 @@
   text-align: center;
 }
 #navigation a{
+  font-size: 1.2em;
   color: black;
   padding: 5px;
   text-decoration: none;
@@ -22,8 +23,7 @@
   background-color: lightgray;
 }
 #content {
+  font-size: 1.2em;
   padding: 10px;
   background-color: lightgray;
-  height: 100vh;
-  width: 50vw;
 }
