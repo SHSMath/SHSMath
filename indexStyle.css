@@ -1,19 +1,29 @@
-#heading {
+* {
   font-family: sans-serif;
+}
+#heading {
   background-color: lightgreen;
   padding: 10px;
   text-align: center;
 }
 #navigation {
   background-color: lightblue;
-  padding: 8px;
+  padding: 12px;
   text-align: center;
 }
 #navigation a{
   color: black;
-  padding: 4px;
+  padding: 5px;
   text-decoration: none;
   border: 1px solid;
+  border-radius: 5px;
   line-height: 2;
   white-space: pre;
+  background-color: lightgray;
+}
+#content {
+  padding: 10px;
+  background-color: lightgray;
+  height: 100vh;
+  width: 50vw;
 }
