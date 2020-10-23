@@ -6,19 +6,12 @@ canvas {
     max-height: 90vh;
 }
 #topbuttons {
-    position: fixed;
-    top: 2vh;
-    left: 5vw;
+    display: inline-block;
     text-align: center;
 }
 button {
-    position: relative;
-    width: 5vw;
+    width: 10vw;
     height: 6vh;
-    min-width: 30px;
-    min-height: 25px;
-    max-height: 50px;
-    max-width: 60px;
     margin: 5px;
 }
 #divide {
