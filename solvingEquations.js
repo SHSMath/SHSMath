@@ -75,7 +75,23 @@ function drawScale() {
     
     drawEquation();
 }
-    
+
+function drawX(positive, adjust, xloc, yloc, i) {
+    var yOffset = -45 + positive * i * 15 + adjust + positive * 10;
+    ctx.fillStyle = "white";
+    ctx.fillRect(xloc, yloc + yOffset, 20, 15);
+    ctx.strokeRect(xloc, yloc + yOffset, 20, 15);
+    ctx.fillStyle = "black";
+    ctx.fillText("X", xloc + 4, yloc + 13 + yOffset);
+  }
+function draw1(positive, adjust, xloc, yloc, i) {
+    yOffset = -45 + positive * i * 15 + adjust + positive * 10;
+    ctx.fillStyle = "white";
+    ctx.fillRect(xloc, yloc + yOffset, 10, 15);
+    ctx.strokeRect(xloc, yloc + yOffset, 10, 15);
+    ctx.fillStyle = "black";
+    ctx.fillText("1", xloc, yloc + 13 + yOffset);
+}
 function drawEquation() {
     //write equation at top of canvas
     ctx.font = "20px san-serif";
@@ -96,12 +112,10 @@ function drawEquation() {
     if (Math.abs(leftCoeff) <= 5) {
         if (leftCoeff < 0) {positive = 1; adjust = -5;}
         for (var i = 0; i < Math.abs(leftCoeff); i++) {
-            var yOffset = -45 + positive * i * 15 + adjust + positive * 10;
-            ctx.fillRect(70, 240 + yOffset, 20, 15);
-            ctx.strokeRect(70, 240 + yOffset, 20, 15);
-            ctx.strokeText("X", 74, 253 + yOffset);
+            drawX(positive, adjust, 70, 240, i);
         }
         }
+  
     //if there are more than 5 boxes split them into two stacks
     if (Math.abs(leftCoeff) > 5) {
         var copy = leftCoeff;
@@ -116,20 +130,16 @@ function drawEquation() {
         //stack for the first 5 boxes
         for (i = 0; i < 5; i++) {
             yOffset = -45 + positive * i * 15 + adjust + positive * 10;
-            ctx.fillRect(68, 240 + yOffset, 20, 15);
-            ctx.strokeRect(68, 240 + yOffset, 20, 15);
-            ctx.strokeText("X", 72, 253 + yOffset);
+            drawX(positive, adjust, 68, 240, i);
         }
         //stack for the leftover boxes
         for (i = 0; i < Math.abs(copy); i++) {
             yOffset = -45 + positive * i * 15 + adjust + positive * 10;
-            ctx.fillRect(90, 240 + yOffset, 20, 15);
-            ctx.strokeRect(90, 240 + yOffset, 20, 15);
-            ctx.strokeText("X", 94, 253 + yOffset);
+            drawX(positive, adjust, 90, 240, i);
         }
     }
     
-    
+
     //create positions for the left ones
     positive = -1;
     adjust = 0;
@@ -137,10 +147,7 @@ function drawEquation() {
     if(Math.abs(leftConst) <= 5) {
         if (leftConst < 0) {positive = 1; adjust = -5;}
         for (i = 0; i < Math.abs(leftConst); i++) {
-            yOffset = -45 + positive * i * 15 + adjust + positive * 10;
-            ctx.fillRect(120, 240 + yOffset, 10, 15);
-            ctx.strokeRect(120, 240 + yOffset, 10, 15);
-            ctx.strokeText("1", 120, 253 + yOffset);
+            draw1(positive, adjust, 120, 240, i);
         }
         }
     //if there are more than 5 ones split them into two stacks
@@ -155,20 +162,12 @@ function drawEquation() {
             copy -= 5;
         }
         for (i = 0; i < 5; i++) {
-                yOffset = -45 + positive * i * 15 + adjust + positive * 10;
-                ctx.fillRect(120, 240 + yOffset, 10, 15);
-                ctx.strokeRect(120, 240 + yOffset, 10, 15);
-                ctx.strokeText("1", 120, 253 + yOffset);
+            draw1(positive, adjust, 120, 240, i);
             }
         for (i = 0; i < Math.abs(copy); i++) {
-                yOffset = -45 + positive * i * 15 + adjust + positive * 10;
-                ctx.fillRect(132, 240 + yOffset, 10, 15);
-                ctx.strokeRect(132, 240 + yOffset, 10, 15);
-                ctx.strokeText("1", 132, 253 + yOffset);
+            draw1(positive, adjust, 132, 240, i);
             }
     }
-    
-    
     
     //create positions for Right Xs
     positive = -1;
@@ -178,9 +177,7 @@ function drawEquation() {
         if (rightCoeff < 0) {positive = 1; adjust = -5;}
         for (i = 0; i < Math.abs(rightCoeff); i++) {
             yOffset = -45 + positive * i * 15 + adjust + positive * 10;
-            ctx.fillRect(470, 240 + yOffset, 20, 15);
-            ctx.strokeRect(470, 240 + yOffset, 20, 15);
-            ctx.strokeText("X", 474, 253 + yOffset);
+                drawX(positive, adjust, 470, 240, i);
         }
     }
     if (Math.abs(rightCoeff) > 5) {
@@ -195,15 +192,11 @@ function drawEquation() {
         }
         for (i = 0; i < 5; i++) {
             yOffset = -45 + positive * i * 15 + adjust + positive * 10;
-            ctx.fillRect(468, 240 + yOffset, 20, 15);
-            ctx.strokeRect(468, 240 + yOffset, 20, 15);
-            ctx.strokeText("X", 472, 253 + yOffset);
+              drawX(positive, adjust, 468, 240, i);
         }
         for (i = 0; i < Math.abs(copy); i++) {
             yOffset = -45 + positive * i * 15 + adjust + positive * 10;
-            ctx.fillRect(490, 240 + yOffset, 20, 15);
-            ctx.strokeRect(490, 240 + yOffset, 20, 15);
-            ctx.strokeText("X", 494, 253 + yOffset);
+            drawX(positive, adjust, 490, 240, i);
         }
     }
     
@@ -216,10 +209,7 @@ function drawEquation() {
     if (Math.abs(rightConst) <= 5) {
         if (rightConst < 0) {positive = 1; adjust = -5;}
         for (i = 0; i < Math.abs(rightConst); i++) {
-            yOffset = -45 + positive * i * 15 + adjust + positive * 10;
-            ctx.fillRect(520, 240 + yOffset, 10, 15);
-            ctx.strokeRect(520, 240 + yOffset, 10, 15);
-            ctx.strokeText("1", 520, 253 + yOffset);
+            draw1(positive, adjust, 520, 240, i);
         }
     }
     if (Math.abs(rightConst) > 5) {
@@ -233,16 +223,10 @@ function drawEquation() {
             copy -= 5;
         }
         for (i = 0; i < 5; i++) {
-            yOffset = -45 + positive * i * 15 + adjust + positive * 10;
-            ctx.fillRect(520, 240 + yOffset, 10, 15);
-            ctx.strokeRect(520, 240 + yOffset, 10, 15);
-            ctx.strokeText("1", 520, 253 + yOffset);
+            draw1(positive, adjust, 520, 240, i);
         }
         for (i = 0; i < Math.abs(copy); i++) {
-            yOffset = -45 + positive * i * 15 + adjust + positive * 10;
-            ctx.fillRect(532, 240 + yOffset, 10, 15);
-            ctx.strokeRect(532, 240 + yOffset, 10, 15);
-            ctx.strokeText("1", 532, 253 + yOffset);
+            draw1(positive, adjust, 532, 240, i);
         }
     }
 }
@@ -276,54 +260,12 @@ function displayquotients() {
     document.getElementById("inputamount").style.display = "inline";
 }
 
-function divideby2() {
-    if (leftCoeff % 2 == 0 && leftConst % 2 == 0 && rightCoeff % 2 == 0 && rightConst % 2 == 0) {
-        leftCoeff /= 2;
-        leftConst /= 2;
-        rightCoeff /= 2;
-        rightConst /= 2;
-        drawScale();
-        document.getElementById("inputamount").style.display = "none";
-    }
-    else {
-        document.getElementById("badinput").style.display = "inline";
-    }
-}
-
-function divideby3() {
-    if (leftCoeff % 3 == 0 && leftConst % 3 == 0 && rightCoeff % 3 == 0 && rightConst % 3 == 0) {
-        leftCoeff /= 3;
-        leftConst /= 3;
-        rightCoeff /= 3;
-        rightConst /= 3;
-        drawScale();
-        document.getElementById("inputamount").style.display = "none";
-    }
-    else {
-        document.getElementById("badinput").style.display = "inline";
-    }
-}
-
-function divideby5() {
-    if (leftCoeff % 5 == 0 && leftConst % 5 == 0 && rightCoeff % 5 == 0 && rightConst % 5 == 0) {
-        leftCoeff /= 5;
-        leftConst /= 5;
-        rightCoeff /= 5;
-        rightConst /= 5;
-        drawScale();
-        document.getElementById("inputamount").style.display = "none";
-    }
-    else {
-        document.getElementById("badinput").style.display = "inline";
-    }
-}
-
-function divideby7() {
-    if (leftCoeff % 7 == 0 && leftConst % 7 == 0 && rightCoeff % 7 == 0 && rightConst % 7 == 0) {
-        leftCoeff /= 7;
-        leftConst /= 7;
-        rightCoeff /= 7;
-        rightConst /= 7;
+function divideby(div) {
+    if (leftCoeff % div == 0 && leftConst % div == 0 && rightCoeff % div == 0 && rightConst % div == 0) {
+        leftCoeff /= div;
+        leftConst /= div;
+        rightCoeff /= div;
+        rightConst /= div;
         drawScale();
         document.getElementById("inputamount").style.display = "none";
     }
@@ -339,3 +281,8 @@ function tryagain() {
 function canceldivision() {
     document.getElementById("inputamount").style.display = "none";
 }
+
+
+
+
+
