@@ -1,11 +1,14 @@
-* {
+
+html, body {
   font-family: sans-serif;
-}
-body {
+  padding: 0;
+  margin: 0;
+  height: 100%;
+  width: 100%;
   background-image: linear-gradient(60deg, #24d476, #608772, #e6f2ec);
-  background-size: 100% 100%;
   background-repeat: no-repeat;
 }
+
 #heading {
   font-size: 1.3em;
   padding: 10px;
