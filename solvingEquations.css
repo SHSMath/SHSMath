@@ -1,5 +1,6 @@
 body {
     text-align: center;
+    
 }
 canvas {
     width: 90vw;
@@ -11,11 +12,13 @@ canvas {
 }
 button {
     width: 10vw;
+    min-width: 36px;
     height: 6vh;
     margin: 5px;
+    font-size: larger;
 }
 #divide {
-    min-width: 60px;
+    font-size: 1.5em;
 }
 #nodivide {
     min-width: 60px;
@@ -37,3 +40,5 @@ button {
 #badinput {
     display: none;   
 }
+
+
