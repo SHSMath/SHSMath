@@ -24,7 +24,7 @@ body {
   border-radius: 5px;
   line-height: 4;
   margin: 2vh;
-  /white-space: pre;
+  white-space: pre;
   background-color: lightgray;
   width: 72vw;
 }
