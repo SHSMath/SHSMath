@@ -1,30 +1,30 @@
 body {
-    text-align: center;
-    
+    text-align: center; 
 }
 canvas {
-    width: 90vw;
-    max-height: 90vh;
+    width: 85vw;
+    max-height: 85vh;
 }
 #topbuttons {
     display: inline-block;
     text-align: center;
 }
-button {
+.operation {
+    font-size: larger;
     width: 10vw;
     min-width: 36px;
     height: 6vh;
     margin: 5px;
+}
+.division button {
     font-size: larger;
+    min-width: 36px;
+    min-height: 36px;
 }
 #divide {
     font-size: 1.5em;
 }
-#nodivide {
-    min-width: 60px;
-    max-width: 90px;
-    height: 60px;
-}
+
 .division {
     position: fixed;
     left: 20vw;
@@ -33,6 +33,7 @@ button {
     padding: 20px;
     text-align: center;
     border: solid 1px;
+    font-size: larger;
 }
 #inputamount {
     display: none;   
@@ -40,5 +41,6 @@ button {
 #badinput {
     display: none;   
 }
+
 
 
