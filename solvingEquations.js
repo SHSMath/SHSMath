@@ -9,9 +9,7 @@ var sign = 1; //switches from 1 to -1 randomly
 
 
 function  runscale() {
-
     generateEquation();
-    //console.log(x, leftCoeff, leftConst, rightCoeff, rightConst);
     drawScale();
 }
     
@@ -46,53 +44,94 @@ function maybeNegative() {
 }
     
 function drawScale() {
+    //draws the scale backdrop
     //clear canvas
     ctx.clearRect(0, 0, 600, 300);
 
     ctx.beginPath();
     ctx.fillStyle = "black";
     ctx.fillRect(200, 270, 200, 30);//base of scale
-    ctx.fillRect(288, 85, 24, 190);//vertical pole
-    ctx.arc(299, 75, 20, 0, 2.1*Math.PI);//circle on top
+    ctx.fillRect(288, 240, 24, 50);//vertical pole
+    ctx.arc(300, 230, 20, 0, 2.1*Math.PI);//circle on top
     ctx.fill();
-       
-    ctx.moveTo(100, 80);//left side of horizontal bar
-    ctx.lineTo(500, 80);//right side of horizontal bar
+
+    ctx.fillRect(80, 225, 440, 12);//horizontal bar
         
-    ctx.moveTo(30, 200);//start left pad
-    ctx.lineTo(170, 200);//end left pad
-        
-    ctx.moveTo (170, 200);
-    ctx.lineTo(100, 80);//line from end left pad to left side of horizontal bar
-    ctx.lineTo(30, 200);//line from left side of horizontal bar to start left pad
-        
-    ctx.moveTo(570, 200);//start right pad
-    ctx.lineTo(430, 200);//end right pad
-        
-    ctx.lineTo(500, 80);//line from end right pad to right side of horizontal bar
-    ctx.lineTo(570, 200);//line from right side of horizontal bar to start right pad
-    ctx.stroke();
+    ctx.fillRect(30, 200, 140, 5);//left pad
+    ctx.fillRect(95, 200, 10, 30);//left vertical
     
+    ctx.moveTo(100, 225);
+    ctx.arc(100, 230, 10, 0, 2.1*Math.PI);//circle on left end
+    ctx.fill();
+        
+    ctx.fillRect(430, 200, 140, 5);//right pad
+    ctx.fillRect(495, 200, 10, 30);//right vertical
+    
+    ctx.moveTo(100, 225);
+    ctx.arc(500, 230, 10, 0, 2.1*Math.PI);//circle on right end
+    ctx.fill();
     drawEquation();
 }
 
-function drawX(positive, adjust, xloc, yloc, i) {
-    var yOffset = -45 + positive * i * 15 + adjust + positive * 10;
+//draws boxes for the positive x's
+//xloc and yloc are created in the drawEquation function
+function drawX(xloc, yloc) {
     ctx.fillStyle = "white";
-    ctx.fillRect(xloc, yloc + yOffset, 20, 15);
-    ctx.strokeRect(xloc, yloc + yOffset, 20, 15);
+    ctx.fillRect(xloc, yloc, 20, 15);
+    ctx.strokeRect(xloc, yloc, 20, 15);
     ctx.fillStyle = "black";
-    ctx.fillText("X", xloc + 4, yloc + 13 + yOffset);
-  }
-function draw1(positive, adjust, xloc, yloc, i) {
-    yOffset = -45 + positive * i * 15 + adjust + positive * 10;
-    ctx.fillStyle = "white";
-    ctx.fillRect(xloc, yloc + yOffset, 10, 15);
-    ctx.strokeRect(xloc, yloc + yOffset, 10, 15);
-    ctx.fillStyle = "black";
-    ctx.fillText("1", xloc, yloc + 13 + yOffset);
+    ctx.fillText("X", xloc + 6, yloc + 13);
 }
+
+//draws boxes for the positive 1's
+//xloc and yloc are created in the drawEquation function
+function draw1(xloc, yloc) {
+    ctx.fillStyle = "white";
+    ctx.fillRect(xloc, yloc, 15, 15);
+    ctx.strokeRect(xloc, yloc, 15, 15);
+    ctx.fillStyle = "black";
+    ctx.fillText("1", xloc + 3, yloc + 13);
+}
+
+//draws balloons for the negative x's
+//xloc and yloc are created in the drawEquation function
+//strx is the starting position of the balloon string
+function drawNegX(xloc, yloc, strX) {
+    ctx.fillStyle = "white";
+    ctx.beginPath();
+    ctx.moveTo(strX, 200);
+    ctx.lineTo(xloc, yloc);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.arc(xloc, yloc, 11, 0, 2*Math.PI);//circle on left end
+    ctx.stroke();
+    ctx.fill();
+    ctx.fillStyle = "black";
+    ctx.fillText("-X", xloc - 9, yloc + 5);
+}
+
+//draws balloons for the negative 1's
+//xloc and yloc are created in the drawEquation function
+//strx is the starting position of the balloon string
+function drawNeg1(xloc, yloc, strX) {
+    ctx.fillStyle = "white";
+    ctx.beginPath();
+    ctx.moveTo(strX, 200);
+    ctx.lineTo(xloc, yloc);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.arc(xloc, yloc, 10, 0, 2*Math.PI);//circle on left end
+    ctx.stroke();
+    ctx.fill();
+    ctx.fillStyle = "black";
+    ctx.fillText("-1", xloc - 7, yloc + 5);
+}
+
 function drawEquation() {
+    var i; //iteration
+    var x; //x pos of box or balloon
+    var y; //y pos of box or balloon
+    var strx; //starting postition of balloon string
     //write equation at top of canvas
     ctx.font = "20px san-serif";
     ctx.fillText(leftCoeff + "X + " + leftConst + " = " + rightCoeff + "X + " +rightConst, 225, 25);
@@ -104,132 +143,84 @@ function drawEquation() {
     //center of left pad is x-200, y-40
     //center of right pad is x+200, y-40
     ctx.font = "15px sans-serif";
-    ctx.fillStyle = "white";
-    var positive = -1;
-    var adjust = 0; //accounts for the box's height
     
-    //if there are less than 5 boxes there is only 1 stack
-    if (Math.abs(leftCoeff) <= 5) {
-        if (leftCoeff < 0) {positive = 1; adjust = -5;}
-        for (var i = 0; i < Math.abs(leftCoeff); i++) {
-            drawX(positive, adjust, 70, 240, i);
-        }
-        }
-  
-    //if there are more than 5 boxes split them into two stacks
-    if (Math.abs(leftCoeff) > 5) {
-        var copy = leftCoeff;
-        if (leftCoeff < 0) {
-            positive = 1;
-            adjust = -5;
-            copy += 5;
-        }
-        if (leftCoeff > 0) {
-            copy -= 5;
-        }
-        //stack for the first 5 boxes
-        for (i = 0; i < 5; i++) {
-            yOffset = -45 + positive * i * 15 + adjust + positive * 10;
-            drawX(positive, adjust, 68, 240, i);
-        }
-        //stack for the leftover boxes
-        for (i = 0; i < Math.abs(copy); i++) {
-            yOffset = -45 + positive * i * 15 + adjust + positive * 10;
-            drawX(positive, adjust, 90, 240, i);
+    //draw boxes for x's on left pad
+    if (leftCoeff > 0) {
+        for (i = 0; i < Math.abs(leftCoeff); i++) {
+            x = (i % 3) * 20; //stack is max 3 boxes wide
+            y = Math.floor(i / 3) * 15; //subt 15 from yloc every 3 boxes
+            drawX(75 - x, 185 - y);
         }
     }
-    
+    //draw balloons for neg. x's on left pad
+    if (leftCoeff < 0) {
+        strx = 55;
+        for (i = 0; i < Math.abs(leftCoeff); i++) {
+            x = (i % 3) * 22; //cluster is max 3 balloons wide
+            y = Math.floor(i / 3) * 22; //subt 20 from yloc every 3 balloons
+            drawNegX(40 + x, 150 - y, strx);
+        }
+    }
 
-    //create positions for the left ones
-    positive = -1;
-    adjust = 0;
-    //if there are less than 5 ones put them in one stack
-    if(Math.abs(leftConst) <= 5) {
-        if (leftConst < 0) {positive = 1; adjust = -5;}
+    //draw boxes for 1's on left pad
+    if (leftConst > 0) {
         for (i = 0; i < Math.abs(leftConst); i++) {
-            draw1(positive, adjust, 120, 240, i);
+            x = (i % 4) * 15; //stack is max 3 boxes wide
+            y = Math.floor(i / 4) * 15; //subt 15 from yloc every 3 boxes
+            draw1(100 + x, 185 - y);
         }
-        }
-    //if there are more than 5 ones split them into two stacks
-    if(Math.abs(leftConst) > 5) {
-        copy = leftConst;
-        if (leftConst < 0) {
-            positive = 1;
-            adjust = -5;
-            copy += 5;
-        }
-        if (leftConst > 0) {
-            copy -= 5;
-        }
-        for (i = 0; i < 5; i++) {
-            draw1(positive, adjust, 120, 240, i);
-            }
-        for (i = 0; i < Math.abs(copy); i++) {
-            draw1(positive, adjust, 132, 240, i);
-            }
     }
     
-    //create positions for Right Xs
-    positive = -1;
-    adjust = 0;
+    //draw balloons for neg. 1's on left pad
+    if (leftConst < 0) {
+        strx = 150;
+        for (i = 0; i < Math.abs(leftConst); i++) {
+            x = (i % 3) * 20; //stack is max 3 boxes wide
+            y = Math.floor(i / 3) * 20; //subt 20 from yloc every 3 boxes
+            drawNeg1(130 + x, 150 - y, strx);
+        }
+    }
     
-    if (Math.abs(rightCoeff) <= 5) {
-        if (rightCoeff < 0) {positive = 1; adjust = -5;}
+    //draw boxes for x's on right pad
+    if (rightCoeff > 0) {
         for (i = 0; i < Math.abs(rightCoeff); i++) {
-            yOffset = -45 + positive * i * 15 + adjust + positive * 10;
-                drawX(positive, adjust, 470, 240, i);
+            x = (i % 3) * 20; //stack is max 3 boxes wide
+            y = Math.floor(i / 3) * 15; //subt 15 from yloc every 3 boxes
+            drawX(475 - x, 185 - y);
+        }
+    } 
+    
+    //draw balloons for neg. x's on right pad
+    if (rightCoeff < 0) {
+        strx = 450;
+        for (i = 0; i < Math.abs(rightCoeff); i++) {
+            x = (i % 3) * 22; //cluster is max 3 balloons wide
+            y = Math.floor(i / 3) * 22; //subt 20 from yloc every 3 balloons
+            drawNegX(430 + x, 150 - y, strx);
         }
     }
-    if (Math.abs(rightCoeff) > 5) {
-        copy = rightCoeff;
-        if (rightCoeff < 0) {
-            positive = 1;
-            adjust = -5;
-            copy += 5;
-        }
-        if (rightCoeff > 0) {
-            copy -= 5;
-        }
-        for (i = 0; i < 5; i++) {
-            yOffset = -45 + positive * i * 15 + adjust + positive * 10;
-              drawX(positive, adjust, 468, 240, i);
-        }
-        for (i = 0; i < Math.abs(copy); i++) {
-            yOffset = -45 + positive * i * 15 + adjust + positive * 10;
-            drawX(positive, adjust, 490, 240, i);
-        }
-    }
-    
-    
-    
-    //create positions for Right ones
-    positive = -1;
-    adjust = 0;
-    
-    if (Math.abs(rightConst) <= 5) {
-        if (rightConst < 0) {positive = 1; adjust = -5;}
+  
+    //draw boxes for 1's on right pad    
+    if (rightConst > 0) {
         for (i = 0; i < Math.abs(rightConst); i++) {
-            draw1(positive, adjust, 520, 240, i);
+            x = (i % 4) * 15; //stack is max 3 boxes wide
+            y = Math.floor(i / 4) * 15; //subt 15 from yloc every 3 boxes
+            draw1(500 + x, 185 - y);
         }
     }
-    if (Math.abs(rightConst) > 5) {
-        copy = rightConst
-        if (rightConst < 0) {
-            positive = 1;
-            adjust = -5;
-            copy += 5;
-        }
-        if (rightConst > 0) {
-            copy -= 5;
-        }
-        for (i = 0; i < 5; i++) {
-            draw1(positive, adjust, 520, 240, i);
-        }
-        for (i = 0; i < Math.abs(copy); i++) {
-            draw1(positive, adjust, 532, 240, i);
+  
+    //draw balloons for neg. 1's on right pad
+    if (rightConst < 0) {
+        strx = 550;
+        for (i = 0; i < Math.abs(rightConst); i++) {
+            x = (i % 3) * 20; //stack is max 3 boxes wide
+            y = Math.floor(i / 3) * 20; //subt 20 from yloc every 3 boxes
+            drawNeg1(530 + x, 150 - y, strx);
         }
     }
 }
+
+
 
 function addX() {
     leftCoeff += 1;
@@ -281,8 +272,3 @@ function tryagain() {
 function canceldivision() {
     document.getElementById("inputamount").style.display = "none";
 }
-
-
-
-
-
