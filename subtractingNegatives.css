@@ -1,0 +1,18 @@
+#canvas1 {
+  width: 60vw;
+  max-height: 80vh;
+  margin-left: 20vw;
+  margin-top: 5vh;
+}
+#controls {
+  text-align: center;
+  position: fixed;
+  left: 2vw;
+  top: 8vh;
+  width: 15vw;
+}
+button {
+  width: 12vw;
+  height: 10vh;
+  margin: 5px;
+}
