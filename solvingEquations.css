@@ -41,6 +41,13 @@ canvas {
 #badinput {
     display: none;   
 }
-
-
-
+#solved {
+  position: fixed;
+  left: 40vw;
+  top: 20vh;
+  width: 20vw;
+  display: none;
+  background-color: #1ee32e;
+  padding: 20px;
+  font-size:larger;
+}
