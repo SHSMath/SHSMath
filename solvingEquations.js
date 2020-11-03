@@ -9,6 +9,7 @@ var sign = 1; //switches from 1 to -1 randomly
 
 
 function  runscale() {
+    document.getElementById("solved").style.display = "none";
     generateEquation();
     drawScale();
 }
@@ -71,12 +72,13 @@ function drawScale() {
     ctx.arc(500, 230, 10, 0, 2.1*Math.PI);//circle on right end
     ctx.fill();
     drawEquation();
+    checkForSolution();
 }
 
 //draws boxes for the positive x's
 //xloc and yloc are created in the drawEquation function
 function drawX(xloc, yloc) {
-    ctx.fillStyle = "white";
+    ctx.fillStyle = "#93fa9c";
     ctx.fillRect(xloc, yloc, 20, 15);
     ctx.strokeRect(xloc, yloc, 20, 15);
     ctx.fillStyle = "black";
@@ -86,7 +88,7 @@ function drawX(xloc, yloc) {
 //draws boxes for the positive 1's
 //xloc and yloc are created in the drawEquation function
 function draw1(xloc, yloc) {
-    ctx.fillStyle = "white";
+    ctx.fillStyle = "#a5e2fa";
     ctx.fillRect(xloc, yloc, 15, 15);
     ctx.strokeRect(xloc, yloc, 15, 15);
     ctx.fillStyle = "black";
@@ -97,7 +99,7 @@ function draw1(xloc, yloc) {
 //xloc and yloc are created in the drawEquation function
 //strx is the starting position of the balloon string
 function drawNegX(xloc, yloc, strX) {
-    ctx.fillStyle = "white";
+    ctx.fillStyle = "#ffc05c";
     ctx.beginPath();
     ctx.moveTo(strX, 200);
     ctx.lineTo(xloc, yloc);
@@ -114,7 +116,7 @@ function drawNegX(xloc, yloc, strX) {
 //xloc and yloc are created in the drawEquation function
 //strx is the starting position of the balloon string
 function drawNeg1(xloc, yloc, strX) {
-    ctx.fillStyle = "white";
+    ctx.fillStyle = "#ff6169";
     ctx.beginPath();
     ctx.moveTo(strX, 200);
     ctx.lineTo(xloc, yloc);
@@ -271,4 +273,18 @@ function tryagain() {
 
 function canceldivision() {
     document.getElementById("inputamount").style.display = "none";
+}
+
+function checkForSolution() {
+  if (leftCoeff === 0 && rightCoeff === 1 && rightConst === 0) {
+    solved();
+  }
+  if (leftCoeff === 1 && rightCoeff === 0 && leftConst === 0) {
+    solved();
+  }
+}
+
+function solved() {
+    document.getElementById("solved").style.display = "inline";
+    document.getElementById("solution").innerHTML = "X = " + x;
 }
