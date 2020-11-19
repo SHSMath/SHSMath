@@ -27,8 +27,9 @@ canvas {
 
 .division {
     position: fixed;
-    left: 20vw;
-    top: 20vh;
+    left: 50%;
+    top: 30%;
+    transform: translate(-50%, -50%);
     background-color: orange;
     padding: 20px;
     text-align: center;
@@ -43,10 +44,12 @@ canvas {
 }
 #solved {
   position: fixed;
-  left: 40vw;
-  top: 20vh;
-  width: 20vw;
+  left: 50%;
+  top: 20%;
+  transform: translate(-50%, -50%);
+  min-width: 20vw;
   display: none;
+  border: solid 1px;
   background-color: #1ee32e;
   padding: 20px;
   font-size:larger;
