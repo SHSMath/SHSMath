@@ -21,7 +21,7 @@ var drawGrid = function() {
 };
 
 var drag = function() {
-if (mousePressed == true) {
+if (mousePressed) {
     var aDist = sqrt(sq(a[0]-mouseX)+sq(a[1]-mouseY));
     var bDist = sqrt(sq(b[0]-mouseX)+sq(b[1]-mouseY));
     if (aDist < bDist && aDist < 15) {
