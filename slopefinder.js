@@ -1,3 +1,8 @@
+var sketchProc = function(processingInstance) {
+     with (processingInstance) {
+        size(400, 400);
+        frameRate(30);
+
 var a = [50, 50];
 var b = [100, 100];
 var slope = -1;
@@ -56,3 +61,12 @@ var draw = function() {
     textSize(20);
     text("slope = " + approxSlope, 251, 23);
 };
+
+}};
+
+    // Get the canvas that Processing-js will use
+    var canvas = document.getElementById("mycanvas");
+    // Pass the function sketchProc (defined in myCode.js) to Processing's constructor.
+    var processingInstance = new Processing(canvas, sketchProc);
+         
+         
