@@ -1,14 +1,13 @@
-var sketchProc = function(processingInstance) {
-     with (processingInstance) {
-        size(400, 400);
-        frameRate(30);
+function setup() {
+  createCanvas(400, 400);
+}
 
 var a = [50, 50];
 var b = [100, 100];
 var slope = -1;
 var approxSlope = -1;
 
-var drawGrid = function() {
+function drawGrid() {
     stroke(209, 209, 209);
     for (var i = 0; i < 440; i += 20) {
         line(i, -1, i, 402);
@@ -18,36 +17,38 @@ var drawGrid = function() {
     line(200, 0, 200, 400);
     line(0, 200, 400, 200);
    
-};
+}
 
-var drag = function() {
-if (mousePressed) {
+function drag() {
+if (mouseIsPressed) {
     var aDist = sqrt(sq(a[0]-mouseX)+sq(a[1]-mouseY));
     var bDist = sqrt(sq(b[0]-mouseX)+sq(b[1]-mouseY));
-    if (aDist < bDist && aDist < 15) {
+    if (aDist < bDist && aDist < 20) {
         a = [mouseX, mouseY];
     }
-    if (bDist < aDist && bDist < 15) {
+    if (bDist < aDist && bDist < 20) {
         b = [mouseX, mouseY];   
     }
 }
-};
+}
 
-var findSlope = function() {
+function findSlope() {
     slope = (a[1] - b[1]) / (a[0] - b[0]);
     approxSlope = round(slope * 1000) / 1000;
-};
+}
 
-var drawLine = function() {
+function drawLine() {
     stroke(0, 114, 214);
     var x1 = a[0]-1000;
     var x2 = a[0]+1000;
     var y1 = a[1]-(1000*slope);
     var y2 = a[1]+(1000*slope);
     line(x1, y1, x2, y2);
-};
+}
 
-var draw = function() {
+
+
+function draw() {
     background(255, 255, 255);
     drawGrid();
     drag();
@@ -60,13 +61,4 @@ var draw = function() {
     fill(0, 0, 0);
     textSize(20);
     text("slope = " + approxSlope, 251, 23);
-};
-
-}};
-
-    // Get the canvas that Processing-js will use
-    var canvas = document.getElementById("mycanvas");
-    // Pass the function sketchProc (defined in myCode.js) to Processing's constructor.
-    var processingInstance = new Processing(canvas, sketchProc);
-         
-         
+}
