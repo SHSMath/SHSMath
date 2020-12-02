@@ -23,10 +23,10 @@ function drag() {
 if (mouseIsPressed) {
     var aDist = sqrt(sq(a[0]-mouseX)+sq(a[1]-mouseY));
     var bDist = sqrt(sq(b[0]-mouseX)+sq(b[1]-mouseY));
-    if (aDist < bDist && aDist < 20) {
+    if (aDist < bDist && aDist < 30) {
         a = [mouseX, mouseY];
     }
-    if (bDist < aDist && bDist < 20) {
+    if (bDist < aDist && bDist < 30) {
         b = [mouseX, mouseY];   
     }
 }
