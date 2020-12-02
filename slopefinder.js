@@ -35,15 +35,27 @@ if (mouseIsPressed) {
 function findSlope() {
     slope = (a[1] - b[1]) / (a[0] - b[0]);
     approxSlope = round(-slope * 1000) / 1000;
+    
 }
 
 function drawLine() {
-    stroke(0, 114, 214);
+    stroke(0, 0, 0);
     var x1 = a[0]-1000;
     var x2 = a[0]+1000;
     var y1 = a[1]-(1000*slope);
     var y2 = a[1]+(1000*slope);
     line(x1, y1, x2, y2);
+    stroke(255,0,0);
+    line(a[0], a[1], a[0], b[1]);
+    var dy = a[1]-b[1];
+    var dx = a[0]-b[0];
+    fill(255,0,0);
+    textSize(15);
+    text(dy, a[0]-32, (a[1]+b[1])/2);
+    stroke(0,0,255);
+    fill(0,0,255);
+    line(b[0], b[1], a[0], b[1]);
+    text(-dx, (a[0]+b[0])/2, b[1]+20);
 }
 
 
@@ -53,8 +65,8 @@ function draw() {
     drawGrid();
     drag();
     findSlope();
-    fill(0, 255, 111);
     drawLine();
+    fill(0, 255, 111);
     stroke(0, 0, 0);
     ellipse(a[0], a[1], 10, 10);
     ellipse(b[0], b[1], 10, 10);
