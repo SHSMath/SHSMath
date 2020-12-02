@@ -45,20 +45,31 @@ function drawLine() {
     var y1 = a[1]-(1000*slope);
     var y2 = a[1]+(1000*slope);
     line(x1, y1, x2, y2);
+}
+
+function drawRise() {
     stroke(255,0,0);
     line(a[0], a[1], a[0], b[1]);
     var dy = a[1]-b[1];
-    var dx = a[0]-b[0];
+    if (a[0]>b[0]) {
+      dy = -dy;
+    }
     fill(255,0,0);
     textSize(15);
-    text(dy, a[0]-32, (a[1]+b[1])/2);
+    text(dy/20, a[0]-35, (a[1]+b[1])/2);
+    
+}
+
+function drawRun() {
+    var dx = a[0]-b[0];
+    if (a[0] > b[0]) {
+      dx = -dx;
+    }
     stroke(0,0,255);
     fill(0,0,255);
     line(b[0], b[1], a[0], b[1]);
-    text(-dx, (a[0]+b[0])/2, b[1]+20);
+    text(-dx/20, (a[0]+b[0])/2, b[1]+20);
 }
-
-
 
 function draw() {
     background(255, 255, 255);
@@ -66,6 +77,8 @@ function draw() {
     drag();
     findSlope();
     drawLine();
+    drawRise();
+    drawRun();
     fill(0, 255, 111);
     stroke(0, 0, 0);
     ellipse(a[0], a[1], 10, 10);
