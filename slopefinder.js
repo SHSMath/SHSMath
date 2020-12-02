@@ -33,8 +33,8 @@ if (mouseIsPressed) {
 }
 
 function findSlope() {
-    slope = -(a[1] - b[1]) / (a[0] - b[0]);
-    approxSlope = round(slope * 1000) / 1000;
+    slope = (a[1] - b[1]) / (a[0] - b[0]);
+    approxSlope = round(-slope * 1000) / 1000;
 }
 
 function drawLine() {
