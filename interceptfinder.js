@@ -62,7 +62,7 @@ function drawXInt() {
   fill(0, 0, 255);
   stroke(0, 0, 0);
   ellipse(xInt, 300, 10, 10);
-  xintercept = (300 - xInt) / 30;
+  xintercept = (xInt - 300) / 30;
   xintercept = round(xintercept*100)/100;
   text("(" + xintercept + ", 0)", xInt, 285);
 }
