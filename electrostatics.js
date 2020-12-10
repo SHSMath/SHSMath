@@ -68,8 +68,8 @@ function computeForce() {
     objects[i].fy = 0;
     for (var j = 0; j < partamt; j++) {
       if (i != j) {
-        var x = objects[j].xpos - objects[i].xpos;
-        var y = objects[j].ypos - objects[i].ypos;
+        var x = objects[i].xpos - objects[j].xpos;
+        var y = objects[i].ypos - objects[j].ypos;
         var f = objects[j].charge * objects[i].charge
         var dist = sqrt((sq(x) + sq(y)));
         objects[i].fx += x*f / pow(dist, 3);
