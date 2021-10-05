@@ -11,9 +11,9 @@ function setup() {
 
 function draw() {
   background(200);
-  scale(3); // Scaled to make model fit into canvas
+  scale(1); // Scaled to make model fit into canvas
   rotateX(frameCount * 0.01);
   rotateY(frameCount * 0.01);
-  normalMaterial(); // For effect
+  //normalMaterial(); // For effect
   model(teapot);
 }
