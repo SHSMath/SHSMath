@@ -1,7 +1,8 @@
-let octahedron;
+let teapot;
 
 function preload() {
-  octahedron = loadModel('tinker.obj');
+  // Load model with normalise parameter set to true
+  teapot = loadModel('tinker.obj', true);
 }
 
 function setup() {
@@ -9,9 +10,10 @@ function setup() {
 }
 
 function draw() {
-  background(256);
+  background(200);
+  scale(3); // Scaled to make model fit into canvas
   rotateX(frameCount * 0.01);
   rotateY(frameCount * 0.01);
-  model(octahedron);
-  scale(5);
+  normalMaterial(); // For effect
+  model(teapot);
 }
