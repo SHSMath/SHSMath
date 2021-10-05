@@ -5,7 +5,7 @@ function preload() {
 }
 
 function setup() {
-  createCanvas(100, 100, WEBGL);
+  createCanvas(400, 400, WEBGL);
 }
 
 function draw() {
